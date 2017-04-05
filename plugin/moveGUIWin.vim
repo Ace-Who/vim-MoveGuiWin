@@ -5,10 +5,10 @@ if !has('gui_running')
 endif
 
 " To allow a count preceding the mapped keys, '<C-U>' has to be used.
-nnoremap <Left>  :<C-U>MoveGUIWin 'Left', v:count<CR>
-nnoremap <Down>  :<C-U>MoveGUIWin 'Down', v:count<CR>
-nnoremap <Up>    :<C-U>MoveGUIWin 'Up', v:count<CR>
-nnoremap <Right> :<C-U>MoveGUIWin 'Right', v:count<CR>
+nnoremap <silent> <Left>  :<C-U>MoveGUIWin 'Left', v:count<CR>
+nnoremap <silent> <Down>  :<C-U>MoveGUIWin 'Down', v:count<CR>
+nnoremap <silent> <Up>    :<C-U>MoveGUIWin 'Up', v:count<CR>
+nnoremap <silent> <Right> :<C-U>MoveGUIWin 'Right', v:count<CR>
 
 " These mappings don't need the user command 'MoveGUIWin'.
 " nnoremap <Left>  :<C-U>call <SID>MoveGUIWin('Left', v:count)<CR>
@@ -26,6 +26,7 @@ function! s:MoveGUIWin(direction, pixnr)
   elseif g:moveGUIWinPix > 200
     let g:moveGUIWinPix = 200
   endif
+  echo 'MoveGUIWin to <' . a:direction . '> by' g:moveGUIWinPix 'pixels.'
   if a:direction ==? 'Left'
     execute 'winpos' (getwinposx() - g:moveGUIWinPix) getwinposy()
   elseif a:direction ==? 'Down'
