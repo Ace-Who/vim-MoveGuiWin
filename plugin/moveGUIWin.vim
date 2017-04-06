@@ -26,7 +26,7 @@ command! -nargs=+ MoveGUIWin call s:MoveGUIWin(<args>)
 
 function! s:MoveGUIWin(direction, pixnr)
   if a:pixnr > 0                | let g:moveGUIWinPix = a:pixnr | endif
-  if !exists('g:moveGUIWinPix') | let g:moveGUIWinPix = 1       | endif
+  if !exists('g:moveGUIWinPix') | let g:moveGUIWinPix = 8       | endif
   if g:moveGUIWinPix < 1
     let g:moveGUIWinPix = 1
   elseif g:moveGUIWinPix > 200
