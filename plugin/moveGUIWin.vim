@@ -1,5 +1,11 @@
 " Move GUI window
 
+" Set the 'cpoptions' option to its Vim default value and restore it later.
+" This is to enable line-continuation within this script.
+" Refer to :help use-cpo-save.
+let s:save_cpoptions = &cpoptions
+set cpoptions&vim
+
 if !has('gui_running')
   finish
 endif
@@ -39,3 +45,5 @@ function! s:MoveGUIWin(direction, pixnr)
   \ 'now: (' . getwinposx() . ',' getwinposy() . ')'
 endfunction
 
+let &cpoptions = s:save_cpoptions
+unlet s:save_cpoptions
