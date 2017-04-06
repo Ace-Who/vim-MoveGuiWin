@@ -26,7 +26,6 @@ function! s:MoveGUIWin(direction, pixnr)
   elseif g:moveGUIWinPix > 200
     let g:moveGUIWinPix = 200
   endif
-  echo 'MoveGUIWin to <' . a:direction . '> by' g:moveGUIWinPix 'pixels.'
   if a:direction ==? 'Left'
     execute 'winpos' (getwinposx() - g:moveGUIWinPix) getwinposy()
   elseif a:direction ==? 'Down'
@@ -36,5 +35,7 @@ function! s:MoveGUIWin(direction, pixnr)
   elseif a:direction ==? 'Right'
     execute 'winpos' (getwinposx() + g:moveGUIWinPix) getwinposy()
   endif
+  echo 'MoveGUIWin to <' . a:direction . '> by' g:moveGUIWinPix . 'px.'
+  \ 'now: (' . getwinposx() . ',' getwinposy() . ')'
 endfunction
 
