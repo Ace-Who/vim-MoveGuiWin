@@ -25,23 +25,23 @@ nnoremap <silent> <Right> :<C-U>MoveGUIWin 'Right', v:count<CR>
 command! -nargs=+ MoveGUIWin call s:MoveGUIWin(<args>)
 
 function! s:MoveGUIWin(direction, pixnr)
-  if a:pixnr > 0                | let g:moveGUIWinPix = a:pixnr | endif
-  if !exists('g:moveGUIWinPix') | let g:moveGUIWinPix = 8       | endif
-  if g:moveGUIWinPix < 1
-    let g:moveGUIWinPix = 1
-  elseif g:moveGUIWinPix > 200
-    let g:moveGUIWinPix = 200
+  if a:pixnr > 0                | let g:MoveGUIWin_px = a:pixnr | endif
+  if !exists('g:MoveGUIWin_px') | let g:MoveGUIWin_px = 8       | endif
+  if g:MoveGUIWin_px < 1
+    let g:MoveGUIWin_px = 1
+  elseif g:MoveGUIWin_px > 200
+    let g:MoveGUIWin_px = 200
   endif
   if a:direction ==? 'Left'
-    execute 'winpos' (getwinposx() - g:moveGUIWinPix) getwinposy()
+    execute 'winpos' (getwinposx() - g:MoveGUIWin_px) getwinposy()
   elseif a:direction ==? 'Down'
-    execute 'winpos' getwinposx() (getwinposy() + g:moveGUIWinPix)
+    execute 'winpos' getwinposx() (getwinposy() + g:MoveGUIWin_px)
   elseif a:direction ==? 'Up'
-    execute 'winpos' getwinposx() (getwinposy() - g:moveGUIWinPix)
+    execute 'winpos' getwinposx() (getwinposy() - g:MoveGUIWin_px)
   elseif a:direction ==? 'Right'
-    execute 'winpos' (getwinposx() + g:moveGUIWinPix) getwinposy()
+    execute 'winpos' (getwinposx() + g:MoveGUIWin_px) getwinposy()
   endif
-  echo 'MoveGUIWin to <' . a:direction . '> by' g:moveGUIWinPix . 'px.'
+  echo 'MoveGUIWin to <' . a:direction . '> by' g:MoveGUIWin_px . 'px.'
   \ 'now: (' . getwinposx() . ',' getwinposy() . ')'
 endfunction
 
