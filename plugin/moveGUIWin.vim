@@ -24,9 +24,10 @@ nnoremap <silent> <Right> :<C-U>MoveGUIWin 'Right', v:count<CR>
 
 command! -nargs=+ MoveGUIWin call s:MoveGUIWin(<args>)
 
-function! s:MoveGUIWin(direction, pixnr)
-  if a:pixnr > 0                | let g:MoveGUIWin_px = a:pixnr | endif
-  if !exists('g:MoveGUIWin_px') | let g:MoveGUIWin_px = 8       | endif
+function! s:MoveGUIWin(direction, px)
+  " 'v:count' defaults to zero when no count is used.
+  if a:px > 0                   | let g:MoveGUIWin_px = a:px | endif
+  if !exists('g:MoveGUIWin_px') | let g:MoveGUIWin_px = 8    | endif
   if g:MoveGUIWin_px < 1
     let g:MoveGUIWin_px = 1
   elseif g:MoveGUIWin_px > 200
