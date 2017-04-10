@@ -28,21 +28,20 @@ function! s:MoveGUIWin(direction, px)
   " 'v:count' defaults to zero when no count is used.
   if a:px > 0                   | let g:MoveGUIWin_px = a:px | endif
   if !exists('g:MoveGUIWin_px') | let g:MoveGUIWin_px = 8    | endif
-  if g:MoveGUIWin_px < 1
-    let g:MoveGUIWin_px = 1
-  elseif g:MoveGUIWin_px > 200
-    let g:MoveGUIWin_px = 200
-  endif
+  " Use a local variable with short name for conciseness.
+  let l:px = g:MoveGUIWin_px
+  if     l:px < 1   | let l:px = 1
+  elseif l:px > 200 | let l:px = 200 | endif
   if a:direction ==? 'Left'
-    execute 'winpos' (getwinposx() - g:MoveGUIWin_px) getwinposy()
+    execute 'winpos' (getwinposx() - l:px) getwinposy()
   elseif a:direction ==? 'Down'
-    execute 'winpos' getwinposx() (getwinposy() + g:MoveGUIWin_px)
+    execute 'winpos' getwinposx() (getwinposy() + l:px)
   elseif a:direction ==? 'Up'
-    execute 'winpos' getwinposx() (getwinposy() - g:MoveGUIWin_px)
+    execute 'winpos' getwinposx() (getwinposy() - l:px)
   elseif a:direction ==? 'Right'
-    execute 'winpos' (getwinposx() + g:MoveGUIWin_px) getwinposy()
+    execute 'winpos' (getwinposx() + l:px) getwinposy()
   endif
-  echo 'MoveGUIWin to <' . a:direction . '> by' g:MoveGUIWin_px . 'px.'
+  echo 'MoveGUIWin to <' . a:direction . '> by' l:px . 'px.'
   \ 'now: (' . getwinposx() . ',' getwinposy() . ')'
 endfunction
 
