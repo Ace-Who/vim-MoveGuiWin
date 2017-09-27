@@ -11,25 +11,25 @@ if !has('gui_running')
 endif
 
 " To allow a count preceding the mapped keys, '<C-U>' has to be used.
-nnoremap <silent> <Left>  :<C-U>MoveGUIWin 'Left', v:count<CR>
-nnoremap <silent> <Down>  :<C-U>MoveGUIWin 'Down', v:count<CR>
-nnoremap <silent> <Up>    :<C-U>MoveGUIWin 'Up', v:count<CR>
-nnoremap <silent> <Right> :<C-U>MoveGUIWin 'Right', v:count<CR>
+nnoremap <silent> <Left>  :<C-U>MoveGuiWin 'Left', v:count<CR>
+nnoremap <silent> <Down>  :<C-U>MoveGuiWin 'Down', v:count<CR>
+nnoremap <silent> <Up>    :<C-U>MoveGuiWin 'Up', v:count<CR>
+nnoremap <silent> <Right> :<C-U>MoveGuiWin 'Right', v:count<CR>
 
-" These mappings don't need the user command 'MoveGUIWin'.
-" nnoremap <Left>  :<C-U>call <SID>MoveGUIWin('Left', v:count)<CR>
-" nnoremap <Down>  :<C-U>call <SID>MoveGUIWin('Down', v:count)<CR>
-" nnoremap <Up>    :<C-U>call <SID>MoveGUIWin('Up', v:count)<CR>
-" nnoremap <Right> :<C-U>call <SID>MoveGUIWin('Right', v:count)<CR>
+" These mappings don't need the user command 'MoveGuiWin'.
+" nnoremap <Left>  :<C-U>call <SID>MoveGuiWin('Left', v:count)<CR>
+" nnoremap <Down>  :<C-U>call <SID>MoveGuiWin('Down', v:count)<CR>
+" nnoremap <Up>    :<C-U>call <SID>MoveGuiWin('Up', v:count)<CR>
+" nnoremap <Right> :<C-U>call <SID>MoveGuiWin('Right', v:count)<CR>
 
-command! -nargs=+ MoveGUIWin call s:MoveGUIWin(<args>)
+command! -nargs=+ MoveGuiWin call s:MoveGuiWin(<args>)
 
-function! s:MoveGUIWin(direction, px)
+function! s:MoveGuiWin(direction, px)
   " 'v:count' defaults to zero when no count is used.
-  if a:px > 0                   | let g:MoveGUIWin_px = a:px | endif
-  if !exists('g:MoveGUIWin_px') | let g:MoveGUIWin_px = 8    | endif
+  if a:px > 0                   | let g:MoveGuiWin_px = a:px | endif
+  if !exists('g:MoveGuiWin_px') | let g:MoveGuiWin_px = 8    | endif
   " Use a local variable with short name for conciseness.
-  let l:px = g:MoveGUIWin_px
+  let l:px = g:MoveGuiWin_px
   if     l:px < 1   | let l:px = 1
   elseif l:px > 200 | let l:px = 200 | endif
   if a:direction ==? 'Left'
@@ -41,7 +41,7 @@ function! s:MoveGUIWin(direction, px)
   elseif a:direction ==? 'Right'
     execute 'winpos' (getwinposx() + l:px) getwinposy()
   endif
-  echo 'MoveGUIWin to <' . a:direction . '> by' l:px . 'px.'
+  echo 'MoveGuiWin to <' . a:direction . '> by' l:px . 'px.'
   \ 'now: (' . getwinposx() . ',' getwinposy() . ')'
 endfunction
 
